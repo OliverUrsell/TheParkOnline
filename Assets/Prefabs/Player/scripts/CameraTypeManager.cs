@@ -17,7 +17,10 @@ public class CameraTypeManager : NetworkBehaviour {
     public ControlType[] cameraOrder = {ControlType.ThirdPerson, ControlType.FirstPerson};
     private int cameraOrderPosition = 0;
 
+    private GameObject nameCanvas;
+
     void Start() {
+        nameCanvas = transform.Find("NameCanvas").gameObject;
         if (this.isLocalPlayer) {
             setCameraType(cameraOrder[0]);
         } else {
@@ -40,12 +43,14 @@ public class CameraTypeManager : NetworkBehaviour {
         switch (ct) {
             case ControlType.FirstPerson:
                 firstPerson.GetComponent<Camera>().enabled = true;
+                nameCanvas.SetActive(false);
                 firstPerson.transform.GetChild(0).gameObject.SetActive(true);
                 firstPerson.transform.localRotation =  thirdPerson.transform.localRotation;
                 thirdPerson.GetComponent<Camera>().enabled = false;
                 break;
             case ControlType.ThirdPerson:
                 thirdPerson.GetComponent<Camera>().enabled = true;
+                nameCanvas.SetActive(true);
                 firstPerson.transform.GetChild(0).gameObject.SetActive(false);
                 thirdPerson.transform.localRotation = firstPerson.transform.localRotation;
                 firstPerson.GetComponent<Camera>().enabled = false;

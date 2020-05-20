@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Mirror;
 
 public class BlockPlayer : NetworkBehaviour {
@@ -22,12 +23,28 @@ public class BlockPlayer : NetworkBehaviour {
     public bool debug = false;
     public bool qeRotation = false;
 
+    public Text namePlate;
+
+    [SyncVar]
+    public Color colour = new Color(1, 0, 1, 1);
+
+    [SyncVar]
+    public string name = "Dick Sucker";
+
     void Start() {
         localPlayer = this.isLocalPlayer;
-        if (localPlayer) {
-            raycastDistance = GetComponent<Collider>().bounds.extents.y + jumpingGroundDistance;        
-        }
         emission = jetpackParticles.emission;
+        if (localPlayer) {
+            Debug.Log("Hello");
+            raycastDistance = GetComponent<Collider>().bounds.extents.y + jumpingGroundDistance;
+            FindObjectOfType<StartHUD>().AssignCustomization();
+        } else {
+            Debug.Log("Hello2");
+            emission.enabled = false;
+            namePlate.text = name;
+            gameObject.GetComponent<Renderer>().material.SetColor("_Color", colour);
+        }
+        //FindObjectsOfType<StartHUD>()[0].AssignCustomization();
     }
 
     void FixedUpdate() {
@@ -102,15 +119,16 @@ public class BlockPlayer : NetworkBehaviour {
             //Jetpack code
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
                 //When either shift key is pressed, add an upwards force turn on the jetpack particles
-                rb.AddForce(Vector3.up * jetpackPower, ForceMode.Acceleration);
-
                 emission.enabled = true;
+                CmdEnableParticles();
+                if (emission.enabled) {
+                    rb.AddForce(Vector3.up * jetpackPower, ForceMode.Acceleration);
+                }
             } else if (emission.enabled) {
                 //If the jetpack has just been turned off
                 emission.enabled = false; //disable the jetpack particles
+                CmdDisableParticles();
             }
-        } else {
-            emission.enabled = false;
         }
     }
 
@@ -124,4 +142,47 @@ public class BlockPlayer : NetworkBehaviour {
             transform.parent = null;
         }
     }
+
+    [Command]
+    public void CmdEnableParticles() {
+        RpcEnableParticles();
+    }
+
+    [Command]
+    public void CmdDisableParticles() {
+        RpcDisableParticles();
+    }
+
+    [ClientRpc]
+    public void RpcEnableParticles() {
+        emission.enabled = true;
+    }
+
+    [ClientRpc]
+    public void RpcDisableParticles() {
+        emission.enabled = false;
+    }
+
+    [Command]
+    public void CmdSetName(string name) {
+        RpcSetName(name);
+    }
+
+    [ClientRpc]
+    public void RpcSetName(string name) {
+        this.name = name;
+        namePlate.text = name;
+    }
+
+    [Command]
+    public void CmdSetColour(Color c) {
+        RpcSetColour(c);
+    }
+
+    [ClientRpc]
+    public void RpcSetColour(Color c) {
+        colour = c;
+        gameObject.GetComponent<Renderer>().material.SetColor("_Color", c);
+    }
+
 }

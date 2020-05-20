@@ -3,12 +3,15 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BlockPlayer
     - CameraTypeManager
+    - CustomNetworkManager
+    - FaceCamera
     - MouseAimCamera
+    - NameToggle
+    - StartHUD
     Mirror.Components.dll:
     - Mirror.NetworkTransform
     Mirror.dll:
     - Mirror.NetworkIdentity
-    - Mirror.NetworkManager
     - Mirror.NetworkManagerHUD
     - Mirror.NetworkStartPosition
     - Mirror.TelepathyTransport
@@ -19,9 +22,16 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
+    - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.InputField
+    - UnityEngine.UI.Text
+    com.unity.quicksearch.dll:
+    - Unity.QuickSearch.SearchDatabase
   sceneClasses:
     Assets/Scenes/Test.unity:
     - Class: 1
@@ -63,26 +73,44 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11238}
     - Class: 114
-      Script: {instanceID: 11354}
-    - Class: 114
       Script: {instanceID: 11358}
+    - Class: 114
+      Script: {instanceID: 11374}
     - Class: 114
       Script: {instanceID: 11418}
     - Class: 114
-      Script: {instanceID: 11632}
+      Script: {instanceID: 11490}
     - Class: 114
-      Script: {instanceID: 12316}
+      Script: {instanceID: 11506}
     - Class: 114
-      Script: {instanceID: 12858}
+      Script: {instanceID: 11636}
     - Class: 114
-      Script: {instanceID: 12878}
+      Script: {instanceID: 11862}
     - Class: 114
-      Script: {instanceID: 12912}
+      Script: {instanceID: 12298}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 12320}
+    - Class: 114
+      Script: {instanceID: 12526}
+    - Class: 114
+      Script: {instanceID: 12862}
+    - Class: 114
+      Script: {instanceID: 12882}
+    - Class: 114
+      Script: {instanceID: 12916}
+    - Class: 114
+      Script: {instanceID: 13084}
+    - Class: 114
+      Script: {instanceID: 13304}
+    - Class: 114
+      Script: {instanceID: 20602}
+    - Class: 114
+      Script: {instanceID: 32578}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 134
       Script: {instanceID: 0}
@@ -253,10 +281,22 @@ ScriptsOnlyBuild:
     className: BenchmarkNetworkManager
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NameToggle
+  - hash:
+      serializedVersion: 2
       Hash: 5da7b9e4b43d0ba75d617a81259ec141
     assemblyName: Mirror.Examples.dll
     namespaceName: Mirror.Examples.Chat
     className: ChatWindow
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FaceCamera
   - hash:
       serializedVersion: 2
       Hash: f3a8ccc18ad656ac8993b34a1b30984f
@@ -673,7 +713,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 71d5574e4a5f6a10c5066338caac7c1c
+      Hash: 732ea8943294b54a424d71808f4b58f1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BlockPlayer
@@ -899,6 +939,24 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 91e64452aaec0565573227eb4344c7cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: StartHUD
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: spin
+  - hash:
+      serializedVersion: 2
+      Hash: e368e8fd731d94c6c95a146c7b8104df
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CustomNetworkManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/Test.unity
